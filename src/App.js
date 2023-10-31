@@ -1,9 +1,9 @@
-import React, {Suspense} from 'react';
+import React, {lazy} from 'react';
 import {
   Route,
   Routes,
 } from "react-router-dom";
-import {router} from './helpers/tabs';
+import router from './helpers/tabs.json';
 import Layout from './components/Layout';
 
 function App() {
@@ -12,12 +12,12 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {router.map(({path, element}, idx) =>
-            <Route path={path} element={
-              <Suspense fallback={<p>Loading...</p>}>
-                {element}
-              </Suspense>
-            } key={idx} />)}
+          {router.map(({path, element, order}) => {
+            const Component = lazy(() => import(`${element}`))
+            return < Route path={path} element={<Component />}
+              key={order} />
+          }
+          )}
         </Route>
       </Routes >
     </>

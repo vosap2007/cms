@@ -1,0 +1,20 @@
+[
+    {
+        "path": "/dummyTable",
+        "title": "Dummy Table",
+        "order": 1,
+        "element": "./components/DummyTable.js"
+    },
+    {
+        "path": "/dummyChart",
+        "title": "Dummy Chart",
+        "order": 2,
+        "element": "./components/DummyChart.js"
+    },
+    {
+        "path": "/",
+        "title": "Dummy List",
+        "order": 0,
+        "element": "./components/DummyList.js"
+    }
+]

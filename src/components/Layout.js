@@ -1,15 +1,27 @@
-import {NavLink, Outlet} from "react-router-dom";
+import React, {Suspense} from 'react';
+import {NavLink, Outlet} from 'react-router-dom';
+import router from '../helpers/tabs.json';
 
 const Layout = () => {
     return (
         <div>
             <header>
-                <NavLink to='/'>Dummy Table</NavLink>
-                <NavLink to='/dummyChart'>Dummy Chart</NavLink>
-                <NavLink to='/dummyList'>Dummy List</NavLink>
+                {router
+                    .sort((a, b) => a.order - b.order)
+                    .map(({path, title}) => (
+                        <NavLink to={path} key={path}>
+                            {title}
+                        </NavLink>
+                    ))
+                }
             </header>
-            <main className="container"><Outlet /></main>
-        </div>);
+            <main className="container">
+                <Suspense fallback={<p>Loading...</p>}>
+                    <Outlet />
+                </Suspense>
+            </main>
+        </div>
+    );
 };
 
 export default Layout;
