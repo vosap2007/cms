@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {
   Route,
   Routes,
@@ -12,10 +12,14 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {router.map(({path, component}, idx) =>
-            <Route path={path} element={component} key={idx} />)}
+          {router.map(({path, element}, idx) =>
+            <Route path={path} element={
+              <Suspense fallback={<p>Loading...</p>}>
+                {element}
+              </Suspense>
+            } key={idx} />)}
         </Route>
-      </Routes>
+      </Routes >
     </>
 
   );
